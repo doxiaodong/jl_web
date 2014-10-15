@@ -1,0 +1,8 @@
+extends ../layout
+
+block css_content
+
+block content
+	each user, i in users
+		a(href="mailto:#{user.email}")
+			div.userlist= user.username
