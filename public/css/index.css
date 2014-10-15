@@ -95,12 +95,24 @@ li {
 .container {
   height: 100%;
   width: 100%;
-  position: absolute;
+  text-align: center;
 }
-.container ul {
+.container:after {
+  content: "";
   height: 100%;
 }
-.container ul li.each-block {
+.container:after,
+.container .list {
+  display: inline-block;
+  vertical-align: middle;
+}
+.container ul.list {
+  height: 100%;
+  max-height: 600px;
+  width: 100%;
+  max-width: 1280px;
+}
+.container ul.list li.each-block {
   width: 50%;
   height: 50%;
   float: left;
@@ -109,15 +121,15 @@ li {
   transition: background-color 0.5s;
   text-align: center;
 }
-.container ul li.each-block:hover {
-  background-color: #ffb74c;
+.container ul.list li.each-block.active {
+  background: #ffb74c;
 }
-.container ul li.each-block:after {
+.container ul.list li.each-block:after {
   content: "";
   height: 100%;
 }
-.container ul li.each-block:after,
-.container ul li.each-block .inner {
+.container ul.list li.each-block:after,
+.container ul.list li.each-block .inner {
   display: inline-block;
   vertical-align: middle;
 }

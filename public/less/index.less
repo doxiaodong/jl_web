@@ -7,10 +7,12 @@
 .container{
 	height: 100%;
 	width: 100%;
-	position: absolute;
-	ul{
+	.inline-block-center(list);
+	ul.list{
 		height: 100%;
-		// margin: 50px 10%;
+		max-height: 600px;
+		width: 100%;
+		max-width: 1280px;
 		li.each-block{
 			width: 50%;
 			height: 50%;
@@ -19,8 +21,11 @@
 			border: 1px solid #ccc;
 
 			transition: background-color 0.5s;
+			&.active{
+				background: @active_base;
+			}
 			&:hover{
-				background-color: @active_base;
+				// background-color: @active_base;
 			}
 			.inline-block-center(inner);
 		}
