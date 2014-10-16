@@ -1,6 +1,15 @@
 window.addEventListener('load', init);
 
 function init() {
+    var $id = function(id){
+        return document.getElementById(id);
+    };
+    var $q = function(q){
+        return document.querySelector(q);
+    };
+    var $qa = function(qa){
+        return document.querySelectorAll(qa);
+    };
     var isTouchScreen = function() {
         return 'ontouchstart' in document.documentElement;
     };
@@ -10,23 +19,38 @@ function init() {
         click: 'click',
     };
 
-    var inner = document.querySelectorAll('li.each-block');
+    var inner = $qa('li.each-block');
     Array.prototype.forEach.call(inner, function(self) {
-        var classNameTmp = self.className;
         self.addEventListener(defaultEvent.click, function() {
-            if (document.querySelector('li.each-block.active')) {
-                document.querySelector('li.each-block.active').className = classNameTmp;
+            if ($q('li.each-block.active')) {
+                removeClass($q('li.each-block.active'), 'active');
                 Array.prototype.forEach.call(inner, function(that) {
-	            	that.className = classNameTmp;
+                    removeClass(that, 'has-one-active');
 	            });
             } else {
             	Array.prototype.forEach.call(inner, function(that) {
-	            	that.className += ' has-one-active';
+                    addClass(that, 'has-one-active');
 	            });
-	            self.className = classNameTmp + ' active';
+                removeClass(self, 'has-one-active');
+                addClass(self, 'active');
             }
         });
     });
 
+    // has/add/remove class
+    function hasClass(obj, cls) {
+        return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+    }
+
+    function addClass(obj, cls) {
+        if (!hasClass(obj, cls)) obj.className += ' ' + cls;
+    }
+
+    function removeClass(obj, cls) {
+        if (hasClass(obj, cls)) {
+            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+            obj.className = obj.className.replace(reg, '');
+        }
+    }
 
 }

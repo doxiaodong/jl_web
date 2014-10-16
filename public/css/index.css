@@ -108,19 +108,34 @@ li {
   vertical-align: middle;
 }
 .container ul.list {
+  position: relative;
   height: 100%;
   max-height: 768px;
   width: 100%;
   max-width: 1024px;
+  background-color: #b7a50e;
 }
 .container ul.list li.each-block {
+  position: absolute;
   width: 50%;
   height: 50%;
-  float: left;
-  background-color: rgba(183, 65, 14, 0.5);
+  background-color: #b7a50e;
   border: 1px solid #ccc;
-  transition: all 0.5s;
+  transition-property: width, height, background-color;
+  transition: 0.5s;
   text-align: center;
+}
+.container ul.list li.each-block.top {
+  top: 0;
+}
+.container ul.list li.each-block.right {
+  right: 0;
+}
+.container ul.list li.each-block.bottom {
+  bottom: 0;
+}
+.container ul.list li.each-block.left {
+  left: 0;
 }
 .container ul.list li.each-block:hover,
 .container ul.list li.each-block.active {
