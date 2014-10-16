@@ -1,30 +1,30 @@
-window.onload = init;
+window.addEventListener('load', init);
 
 function init() {
     var isTouchScreen = function() {
         return 'ontouchstart' in document.documentElement;
     };
     var defaultEvent = isTouchScreen() ? {
-        mouseover: 'touchstart',
-        mouseout: 'touchend'
+        click: 'touchend',
     } : {
-        mouseover: 'mouseover',
-        mouseout: 'mouseout'
+        click: 'click',
     };
 
     var inner = document.querySelectorAll('li.each-block');
     Array.prototype.forEach.call(inner, function(self) {
         var classNameTmp = self.className;
-        self.addEventListener(defaultEvent.mouseover, function() {
+        self.addEventListener(defaultEvent.click, function() {
             if (document.querySelector('li.each-block.active')) {
                 document.querySelector('li.each-block.active').className = classNameTmp;
+                Array.prototype.forEach.call(inner, function(that) {
+	            	that.className = classNameTmp;
+	            });
+            } else {
+            	Array.prototype.forEach.call(inner, function(that) {
+	            	that.className += ' has-one-active';
+	            });
+	            self.className = classNameTmp + ' active';
             }
-            self.className += ' active';
-        });
-        self.addEventListener(defaultEvent.mouseout, function() {
-            setTimeout(function() {
-                self.className = classNameTmp;
-            }, 300);
         });
     });
 
