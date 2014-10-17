@@ -24,12 +24,15 @@
             width: 50%;
             height: 50%;
 
-            transition-duration: .5s;
-            transition-property: width, height, background-color, opacity;
+			transition: width @t_time, height @t_time, background-color @t_time, opacity @t_time;
+			// 收起曲线
+			transition-timing-function: @t_ease;
 
             border: 1px solid #ccc;
             background-color: @block_color;
 
+			@t_time: .5s;
+			@t_ease: cubic-bezier(.13,.87,.96,.34);
             .inline-block-center(inner);
             &.top {
                 top: 0;
@@ -43,8 +46,7 @@
             &.left {
                 left: 0;
             }
-            &:hover,
-            &.active {
+            &:hover, &.active {
                 background: @active_base;
             }
             &.active {
@@ -59,6 +61,12 @@
 
                 opacity: 0;
                 border: 0 solid;
+            }
+            &.active, &.has-one-active {
+            	transition-timing-function: @t_ease;
+				//展开曲线
+
+                @t_ease: cubic-bezier(.31,.66,.7,.38);
             }
         }
     }

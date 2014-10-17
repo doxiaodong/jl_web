@@ -119,8 +119,8 @@ li {
   position: absolute;
   width: 50%;
   height: 50%;
-  transition-duration: .5s;
-  transition-property: width, height, background-color, opacity;
+  transition: width 0.5s, height 0.5s, background-color 0.5s, opacity 0.5s;
+  transition-timing-function: cubic-bezier(0.13, 0.87, 0.96, 0.34);
   border: 1px solid #ccc;
   background-color: #b7a50e;
   text-align: center;
@@ -160,5 +160,9 @@ li {
   height: 0;
   opacity: 0;
   border: 0 solid;
+}
+.container ul.list li.each-block.active,
+.container ul.list li.each-block.has-one-active {
+  transition-timing-function: cubic-bezier(0.31, 0.66, 0.7, 0.38);
 }
 /*# sourceMappingURL=index.css.map */
