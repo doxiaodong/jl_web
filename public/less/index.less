@@ -1,59 +1,65 @@
-@import "_base";
-@import "partless/_clearfix";
-@import "partless/_inline-block-center";
-
+@import '_base';
+@import 'partless/_clearfix';
+@import 'partless/_inline-block-center';
 @block_color: rgba(183, 165, 14, 1);
+.container {
+    width: 100%;
+    height: 100%;
+    // 3DÍ¸ÊÓ
 
-.container{
-	height: 100%;
-	width: 100%;
-	// 3Dè§†è§’
-	-webkit-perspective: 350px;
-	.inline-block-center(list);
-	ul.list{
-		position: relative;
-		height: 100%;
-		max-height: 768px;
-		width: 100%;
-		max-width: 1024px;
-		background-color: @block_color;
-		li.each-block{
-			position: absolute;
-			width: 50%;
-			height: 50%;
-			background-color: @block_color;
-			border: 1px solid #ccc;
-			transition-property: width,height,background-color;
-			transition: 0.5s;			
-			
-			&.top{
-				top: 0;
-			}
-			&.right{
-				right: 0;
-			}
-			&.bottom{
-				bottom: 0;
-			}
-			&.left{
-				left: 0;
-			}
-			
-			&:hover, &.active{
-				background: @active_base;
-			}
-			&.active{
-				width: 100%;
-				height: 100%;
-			}
-			&.has-one-active{
-				width: 0;
-				height: 0;
-				opacity: 0;
-				overflow: hidden;
-				border: 0px solid;
-			}
-			.inline-block-center(inner);
-		}
-	}
+    -webkit-perspective: 350px;
+    .inline-block-center(list);
+    ul.list {
+        position: relative;
+
+        width: 100%;
+        max-width: 1024px;
+        height: 100%;
+        max-height: 768px;
+
+        background-color: @block_color;
+        li.each-block {
+            position: absolute;
+
+            width: 50%;
+            height: 50%;
+
+            transition-duration: .5s;
+            transition-property: width, height, background-color, opacity;
+
+            border: 1px solid #ccc;
+            background-color: @block_color;
+
+            .inline-block-center(inner);
+            &.top {
+                top: 0;
+            }
+            &.right {
+                right: 0;
+            }
+            &.bottom {
+                bottom: 0;
+            }
+            &.left {
+                left: 0;
+            }
+            &:hover,
+            &.active {
+                background: @active_base;
+            }
+            &.active {
+                width: 100%;
+                height: 100%;
+            }
+            &.has-one-active {
+                overflow: hidden;
+
+                width: 0;
+                height: 0;
+
+                opacity: 0;
+                border: 0 solid;
+            }
+        }
+    }
 }
