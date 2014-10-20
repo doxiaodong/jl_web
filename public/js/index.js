@@ -23,16 +23,21 @@ function init() {
     Array.prototype.forEach.call(inner, function(self) {
         self.addEventListener(defaultEvent.click, function() {
             if ($q('li.each-block.active')) {
-                removeClass($q('li.each-block.active'), 'active');
+                $q('li.each-block.active').classList.remove('active');
+                // removeClass($q('li.each-block.active'), 'active');
                 Array.prototype.forEach.call(inner, function(that) {
-                    removeClass(that, 'has-one-active');
+                    that.classList.remove('has-one-active');
+                    // removeClass(that, 'has-one-active');
 	            });
             } else {
             	Array.prototype.forEach.call(inner, function(that) {
-                    addClass(that, 'has-one-active');
+                    that.classList.add('has-one-active');
+                    // addClass(that, 'has-one-active');
 	            });
-                removeClass(self, 'has-one-active');
-                addClass(self, 'active');
+                self.classList.remove('has-one-active');
+                self.classList.add('active');
+                // removeClass(self, 'has-one-active');
+                // addClass(self, 'active');
             }
         });
     });
