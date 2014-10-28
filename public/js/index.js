@@ -21,23 +21,25 @@ function init() {
 
     var inner = $qa('li.each-block');
     Array.prototype.forEach.call(inner, function(self) {
+        var timeAfterActive;
         self.addEventListener(defaultEvent.click, function() {
+            clearTimeout(timeAfterActive);
             if ($q('li.each-block.active')) {
-                $q('li.each-block.active').classList.remove('active');
-                // removeClass($q('li.each-block.active'), 'active');
+                $q('.list').classList.remove('active');
+                $q('li.each-block.active').classList.remove('active', 'after-active');
                 Array.prototype.forEach.call(inner, function(that) {
                     that.classList.remove('has-one-active');
-                    // removeClass(that, 'has-one-active');
 	            });
             } else {
             	Array.prototype.forEach.call(inner, function(that) {
                     that.classList.add('has-one-active');
-                    // addClass(that, 'has-one-active');
 	            });
                 self.classList.remove('has-one-active');
                 self.classList.add('active');
-                // removeClass(self, 'has-one-active');
-                // addClass(self, 'active');
+                timeAfterActive = setTimeout(function() {
+                    self.classList.add('after-active');
+                    $q('.list').classList.add('active');
+                }, 500);
             }
         });
     });

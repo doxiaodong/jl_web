@@ -1,11 +1,25 @@
-@import '_base';
-@import 'partless/_clearfix';
-@import 'partless/_inline-block-center';
+@import 'pages/_container_layout';
+@import 'pages/_page1';
+@import 'pages/_page2';
+@import 'pages/_page3';
+@import 'pages/_page4';
 @block_color: rgba(183, 165, 14, 1);
+
+.opacity-height-0() {
+    height: 0;
+
+    opacity: 0;
+}
+.opacity-height-1() {
+    height: auto;
+
+    opacity: 1;
+}
+
 .container {
     width: 100%;
     height: 100%;
-    // 3D透视
+    // 3D脥赂脢脫
 
     -webkit-perspective: 350px;
     .inline-block-center(list);
@@ -18,21 +32,26 @@
         max-height: 768px;
 
         background-color: @block_color;
+        &.active {
+            max-width: 100%;
+        }
         li.each-block {
             position: absolute;
+
+            overflow: hidden;
 
             width: 50%;
             height: 50%;
 
-			transition: width @t_time, height @t_time, background-color @t_time, opacity @t_time;
-			// 收起曲线
-			transition-timing-function: @t_ease;
+            transition: @t_time;
+            transition-timing-function: @t_ease;
+            transition-property: width, height, background-color, opacity;
 
             border: 1px solid #ccc;
             background-color: @block_color;
 
-			@t_time: .5s;
-			@t_ease: cubic-bezier(.13,.87,.96,.34);
+            @t_time: @base_duration;
+            @t_ease: cubic-bezier(.13,.87,.96,.34);
             .inline-block-center(inner);
             &.top {
                 top: 0;
@@ -53,6 +72,12 @@
                 width: 100%;
                 height: 100%;
             }
+            &.after-active {
+                overflow: inherit;
+
+                height: auto;
+                min-height: 100%;
+            }
             &.has-one-active {
                 overflow: hidden;
 
@@ -63,10 +88,24 @@
                 border: 0 solid;
             }
             &.active, &.has-one-active {
-            	transition-timing-function: @t_ease;
-				//展开曲线
+                transition-timing-function: @t_ease;
 
                 @t_ease: cubic-bezier(.31,.66,.7,.38);
+            }
+            .inner .title, &.after-active .inner .inner-container {
+                transition: @base_duration;
+                transition-property: opacity;
+
+                .opacity-height-1;
+            }
+            .inner .inner-container, &.active .inner .title {
+                .opacity-height-0;
+            }
+            .inner {
+                width: 100%;
+                .inner-container {
+                    text-align: left;
+                }
             }
         }
     }

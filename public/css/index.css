@@ -92,6 +92,11 @@ li {
 .clearfix:after {
   clear: both;
 }
+.pages {
+  width: 100%;
+  max-width: 1024px;
+  min-height: 100%;
+}
 .container {
   width: 100%;
   height: 100%;
@@ -115,12 +120,17 @@ li {
   max-height: 768px;
   background-color: #b7a50e;
 }
+.container ul.list.active {
+  max-width: 100%;
+}
 .container ul.list li.each-block {
   position: absolute;
+  overflow: hidden;
   width: 50%;
   height: 50%;
-  transition: width 0.5s, height 0.5s, background-color 0.5s, opacity 0.5s;
+  transition: 0.5s;
   transition-timing-function: cubic-bezier(0.13, 0.87, 0.96, 0.34);
+  transition-property: width, height, background-color, opacity;
   border: 1px solid #ccc;
   background-color: #b7a50e;
   text-align: center;
@@ -154,6 +164,11 @@ li {
   width: 100%;
   height: 100%;
 }
+.container ul.list li.each-block.after-active {
+  overflow: inherit;
+  height: auto;
+  min-height: 100%;
+}
 .container ul.list li.each-block.has-one-active {
   overflow: hidden;
   width: 0;
@@ -164,5 +179,23 @@ li {
 .container ul.list li.each-block.active,
 .container ul.list li.each-block.has-one-active {
   transition-timing-function: cubic-bezier(0.31, 0.66, 0.7, 0.38);
+}
+.container ul.list li.each-block .inner .title,
+.container ul.list li.each-block.after-active .inner .inner-container {
+  transition: 0.5s;
+  transition-property: opacity;
+  height: auto;
+  opacity: 1;
+}
+.container ul.list li.each-block .inner .inner-container,
+.container ul.list li.each-block.active .inner .title {
+  height: 0;
+  opacity: 0;
+}
+.container ul.list li.each-block .inner {
+  width: 100%;
+}
+.container ul.list li.each-block .inner .inner-container {
+  text-align: left;
 }
 /*# sourceMappingURL=index.css.map */
