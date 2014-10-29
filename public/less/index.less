@@ -4,6 +4,7 @@
 @import 'pages/_page3';
 @import 'pages/_page4';
 @block_color: rgba(183, 165, 14, 1);
+@header_height: 50px;
 
 .opacity-height-0() {
     height: 0;
@@ -16,11 +17,36 @@
     opacity: 1;
 }
 
+.header {
+    position: fixed;
+    z-index: 9999999;
+
+    width: 100%;
+
+    transition: @base_duration;
+    transition-property: height, opacity;
+
+    .background-gradient(top, #333, #333);
+    .opacity-height-0;
+    &.active {
+        height: @header_height;
+
+        opacity: 1;
+    }
+    .nav-list {
+        .each-nav {
+            float: left;
+
+            color: rgb(255, 255, 255);
+        }
+    }
+}
+
 .container {
     width: 100%;
     height: 100%;
-    // 3DÍ¸ÊÓ
 
+    .background-gradient(top, @bg_base, @block_color);
     -webkit-perspective: 350px;
     .inline-block-center(list);
     ul.list {
@@ -32,9 +58,6 @@
         max-height: 768px;
 
         background-color: @block_color;
-        &.active {
-            max-width: 100%;
-        }
         li.each-block {
             position: absolute;
 
@@ -47,7 +70,6 @@
             transition-timing-function: @t_ease;
             transition-property: width, height, background-color, opacity;
 
-            border: 1px solid #ccc;
             background-color: @block_color;
 
             @t_time: @base_duration;
@@ -55,9 +77,13 @@
             .inline-block-center(inner);
             &.top {
                 top: 0;
+
+                border-bottom: 1px solid #ccc;
             }
             &.right {
                 right: 0;
+
+                border-left: 1px solid #ccc;
             }
             &.bottom {
                 bottom: 0;
@@ -72,11 +98,13 @@
                 width: 100%;
                 height: 100%;
             }
+            &.after-active, &.has-one-active {
+                border: 0 solid;
+            }
             &.after-active {
-                overflow: inherit;
-
-                height: auto;
-                min-height: 100%;
+                .inner {
+                    height: 100%;
+                }
             }
             &.has-one-active {
                 overflow: hidden;
@@ -85,7 +113,6 @@
                 height: 0;
 
                 opacity: 0;
-                border: 0 solid;
             }
             &.active, &.has-one-active {
                 transition-timing-function: @t_ease;
@@ -102,8 +129,12 @@
                 .opacity-height-0;
             }
             .inner {
+                overflow: hidden;
+
                 width: 100%;
                 .inner-container {
+                    padding-top: @header_height;
+
                     text-align: left;
                 }
             }

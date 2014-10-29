@@ -25,8 +25,8 @@ function init() {
         self.addEventListener(defaultEvent.click, function() {
             clearTimeout(timeAfterActive);
             if ($q('li.each-block.active')) {
-                $q('.list').classList.remove('active');
-                $q('li.each-block.active').classList.remove('active', 'after-active');
+                $q('header.header').classList.remove('active');
+                $q('li.each-block.active').classList.remove('after-active', 'active');
                 Array.prototype.forEach.call(inner, function(that) {
                     that.classList.remove('has-one-active');
 	            });
@@ -38,7 +38,7 @@ function init() {
                 self.classList.add('active');
                 timeAfterActive = setTimeout(function() {
                     self.classList.add('after-active');
-                    $q('.list').classList.add('active');
+                    $q('header.header').classList.add('active');
                 }, 500);
             }
         });
