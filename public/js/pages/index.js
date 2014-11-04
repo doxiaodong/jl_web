@@ -18,7 +18,6 @@ function init() {
     } : {
         click: 'click',
     };
-
     var inner = $qa('li.each-block');
     Array.prototype.forEach.call(inner, function(self) {
         var timeAfterActive;

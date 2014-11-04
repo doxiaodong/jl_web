@@ -1,5 +1,6 @@
+// modules
 var gulp = require('gulp'),
-	less = require('gulp-less'),
+	less = require('gulp-less-sourcemap'),
 	sourcemaps = require('gulp-sourcemaps'),
 	minifycss = require('gulp-minify-css'),
 	jshint = require('gulp-jshint'),
@@ -12,11 +13,11 @@ var gulp = require('gulp'),
 var paths = {
 	less: {
 		less: 'public/less/index.less',
-		lesses: 'public/less/*.less', 
+		lesses: 'public/less/**/*.less', 
 	},
 	css: 'public/css',
 	js: {
-		jses: 'public/js/pages/*.js',
+		jses: 'public/js/pages/**/*.js',
 		main: 'public/js'
 	}
 }
@@ -24,12 +25,7 @@ var paths = {
 // tasks
 gulp.task('less', function() {
 	return gulp.src(paths.less.less)
-	// .pipe(sourcemaps.init())
 	.pipe(less())
-	.pipe(gulp.dest(paths.css))
-	.pipe(rename({suffix: '.min'}))
-	.pipe(minifycss())
-	// .pipe(sourcemaps.write())
 	.pipe(gulp.dest(paths.css))
 });
 
@@ -37,8 +33,10 @@ gulp.task('js', function() {
 	return gulp.src(paths.js.jses)
 	.pipe(jshint())
 	.pipe(jshint.reporter('default'))
+	.pipe(sourcemaps.init())
 	.pipe(concat('main.min.js'))
 	.pipe(uglify())
+	.pipe(sourcemaps.write('./maps'))
 	.pipe(gulp.dest(paths.js.main))
 });
 

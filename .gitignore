@@ -2,3 +2,4 @@ data
 mongodb
 node_modules
 rockmongo
+npm-debug.log
