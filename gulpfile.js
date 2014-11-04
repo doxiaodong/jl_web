@@ -8,43 +8,49 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	del = require('del');
 
-// srcs
-var lessSrc = 'public/less/index.less';
-var cssSrc = 'public/css';
-
-var jsSrc = 'public/js/pages/index.js';
-var jsMainSrc = 'public/js';
+// paths
+var paths = {
+	less: {
+		less: 'public/less/index.less',
+		lesses: 'public/less/*.less', 
+	},
+	css: 'public/css',
+	js: {
+		jses: 'public/js/pages/*.js',
+		main: 'public/js'
+	}
+}
 
 // tasks
 gulp.task('less', function() {
-	return gulp.src(lessSrc)
-	.pipe(sourcemaps.init())
+	return gulp.src(paths.less.less)
+	// .pipe(sourcemaps.init())
 	.pipe(less())
-	.pipe(gulp.dest(cssSrc))
+	.pipe(gulp.dest(paths.css))
 	.pipe(rename({suffix: '.min'}))
 	.pipe(minifycss())
-	.pipe(sourcemaps.write('./map'))
-	.pipe(gulp.dest(cssSrc))
+	// .pipe(sourcemaps.write())
+	.pipe(gulp.dest(paths.css))
 });
 
 gulp.task('js', function() {
-	return gulp.src(jsSrc)
+	return gulp.src(paths.js.jses)
 	.pipe(jshint())
 	.pipe(jshint.reporter('default'))
 	.pipe(concat('main.min.js'))
 	.pipe(uglify())
-	.pipe(gulp.dest(jsMainSrc))
+	.pipe(gulp.dest(paths.js.main))
 });
 
 gulp.task('clean', function(cb) {
-	del([cssSrc], cb);
+	del([paths.css], cb);
 });
 
 gulp.task('watch', function() {
-	gulp.watch(lessSrc, ['less']);
-	gulp.watch(jsSrc, ['js']);
+	gulp.watch(paths.less.lesses, ['less']);
+	gulp.watch(paths.js.jses, ['js']);
 });
 
 gulp.task('default', ['clean'], function() {
-	gulp.start('watch');
+	gulp.start('watch', 'less', 'js');
 });
