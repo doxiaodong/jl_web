@@ -43,7 +43,6 @@ function init() {
             }
         });
     });
-
     // has/add/remove class
     function hasClass(obj, cls) {
         return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
