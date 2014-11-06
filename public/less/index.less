@@ -20,20 +20,24 @@
 .header {
     position: fixed;
     z-index: 9999999;
+    opacity: 0;
 
     overflow: hidden;
 
     width: 100%;
+    height: @header_height;
+
+    transform: scale3d(1, .5, 1);
+    transform-origin: left top;
 
     transition: @base_duration;
-    transition-property: height, opacity;
+    transition-property: transform, opacity;
 
     .background-gradient(top, #333, #333);
-    .opacity-height-0;
     &.active {
-        height: @header_height;
-
         opacity: 1;
+
+        transform: scale3d(1, 1, 1);
     }
     .nav-list {
         .each-nav {
@@ -65,12 +69,13 @@
 
             overflow: hidden;
 
-            width: 50%;
-            height: 50%;
+            width: 100%;
+            height: 100%;
+            transform: scale3d(.5, .5, 1);
 
             transition: @t_time;
             transition-timing-function: @t_ease;
-            transition-property: width, height, background-color, opacity;
+            transition-property: background-color, opacity, transform;
 
             background-color: @block_color;
 
@@ -87,12 +92,20 @@
                     border-@{bottom}: 1px solid #ccc;
                 }
             }
+            .each-block-mixin-transform-origin(left, top);
+            .each-block-mixin-transform-origin(right, top);
+            .each-block-mixin-transform-origin(left, bottom);
+            .each-block-mixin-transform-origin(right, bottom);
+            .each-block-mixin-transform-origin(@left, @top) {
+                &.@{left}.@{top} {
+                    transform-origin: @left @top;
+                }
+            }
             &:hover, &.active {
                 background: @active_base;
             }
             &.active {
-                width: 100%;
-                height: 100%;
+                transform: scale3d(1, 1, 1);
                 padding-top: @header_height;
                 .inner {
                     .title {
@@ -114,8 +127,7 @@
             &.has-one-active {
                 overflow: hidden;
 
-                width: 0;
-                .opacity-height-0;
+                transform: scale3d(0, 0, 0);
             }
             &.active, &.has-one-active {
                 transition-timing-function: @t_ease;
