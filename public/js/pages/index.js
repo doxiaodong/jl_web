@@ -1,15 +1,8 @@
 window.addEventListener('load', init);
 
 function init() {
-    var $id = function(id){
-        return document.getElementById(id);
-    };
-    var $q = function(q){
-        return document.querySelector(q);
-    };
-    var $qa = function(qa){
-        return document.querySelectorAll(qa);
-    };
+    var html = $('html');
+    var body = $('body');
     var isTouchScreen = function() {
         return 'ontouchstart' in document.documentElement;
     };
@@ -18,44 +11,73 @@ function init() {
     } : {
         click: 'click',
     };
-    var inner = $qa('li.each-block');
-    Array.prototype.forEach.call(inner, function(self) {
-        var timeAfterActive;
-        self.addEventListener(defaultEvent.click, function() {
+    // header
+    var headerNav = $('.header').find('.nav-list');
+    var inner = $('li.each-block');
+    var timeAfterActive;
+    inner.each(function(index) {
+        $(this).on(defaultEvent.click, function() {
             clearTimeout(timeAfterActive);
-            if ($q('li.each-block.active')) {
-                $q('header.header').classList.remove('active');
-                $q('li.each-block.active').classList.remove('after-active', 'active');
-                Array.prototype.forEach.call(inner, function(that) {
-                    that.classList.remove('has-one-active');
-	            });
+            if ($(this).hasClass('active')) {
+                // collapsePage(inner);
             } else {
-            	Array.prototype.forEach.call(inner, function(that) {
-                    that.classList.add('has-one-active');
-	            });
-                self.classList.remove('has-one-active');
-                self.classList.add('active');
-                timeAfterActive = setTimeout(function() {
-                    self.classList.add('after-active');
-                    $q('header.header').classList.add('active');
-                }, 500);
+                expandPage(inner, $(this));
+
+                sliderNav(index);
             }
         });
     });
-    // has/add/remove class
-    function hasClass(obj, cls) {
-        return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+    
+    headerNav.find('.each-nav').each(function(index) {
+        $(this).on(defaultEvent.click, function() {
+
+            collapsePage(inner, true);
+            expandPage(inner, inner.eq(index), true);
+            sliderNav(index);
+        });
+    });
+
+    // expand
+    function expandPage(inner, obj, head) {
+        inner.addClass('has-one-active');
+        obj.addClass('active');
+        obj.removeClass('has-one-active');
+        
+        timeAfterActive = setTimeout(function() {
+            obj.addClass('after-active');
+            if (!head) {
+                $('header.header').addClass('active');
+            }
+        }, 500);
+    }
+    // collapse
+    function collapsePage(inner, head) {
+        if (!head) {
+            $('header.header').removeClass('active');
+        }
+        $('li.each-block.active').removeClass('after-active active');
+        inner.removeClass('has-one-active');
     }
 
-    function addClass(obj, cls) {
-        if (!hasClass(obj, cls)) obj.className += ' ' + cls;
-    }
-
-    function removeClass(obj, cls) {
-        if (hasClass(obj, cls)) {
-            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-            obj.className = obj.className.replace(reg, '');
+    // slider nav
+    function sliderNav(index) {
+        var eachNav = headerNav.find('.each-nav');
+        eachNav.each(function() {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+            }
+        });
+        eachNav.eq(index).addClass('active');
+        if (eachNav.eq(index).hasClass('active')) {
+            var num = eachNav.length;
+            headerNav.find('.slider-nav').css({
+                left: 1/num*index*100+'%'
+                // '-webkit-transform': '-webkit-translate3d(' + index * 100 + '%, 0, 0)',
+                // '-moz-transform': '-moz-translate3d(' + index * 100 + '%, 0, 0)',
+                // '-ms-transform': '-ms-translate3d(' + index * 100 + '%, 0, 0)',
+                // '-o-transform': 'tran-o-slate3d(' + index * 100 + '%, 0, 0)',
+                // 'transform': 'translate3d(' + index * 100 + '%, 0, 0)'
+            });
         }
     }
-
 }
