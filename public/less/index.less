@@ -3,11 +3,7 @@
 @import 'pages/_page2';
 @import 'pages/_page3';
 @import 'pages/_page4';
-@block_color: @bg_base;
-@header_height: 50px;
-@max-width: 1024px;
-@max-height: 100%;
-@header-active: rgb(255, 99, 71);
+
 .opacity-height-0() {
     height: 0;
 
@@ -18,6 +14,17 @@
 
     opacity: 1;
 }
+
+.slider(@num) when (@num > 0) {
+    .slider(@num - 1);
+    .page-@{num} {
+        .slider-nav {
+            .transform-translate3d(@num*100%-100%, 0, 0);
+        }
+    }
+}
+
+.slider(4);
 
 .header {
     position: fixed;
@@ -51,7 +58,7 @@
         position: relative;
         .each-nav {
             float: left;
-
+            cursor: pointer;
             color: rgb(255, 255, 255);
             width: 25%;
             height: 100%;
@@ -69,12 +76,28 @@
             top: 0;
             left: 0;
             opacity: 0.5;
-            .transition(left @base_duration);
-            // -webkit-transition-property: -webkit-transform;
-            // -moz-transition-property: -moz-transform;
-            // -ms-transition-property: -ms-transform;
-            // -o-transition-property: -o-transform;
-            // transition-property: transform;
+            .transition(@base_duration);
+            -webkit-transition-property: -webkit-transform;
+            -moz-transition-property: -moz-transform;
+            -ms-transition-property: -ms-transform;
+            -o-transition-property: -o-transform;
+            transition-property: transform;
+        }
+        .back-index {
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            text-align: center;
+            line-height: 50px;
+            color: #fff;
+            left: 100%;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 1124px) {
+            .back-index {
+                visibility: hidden;
+                width: 0;
+            }
         }
     }
 }
@@ -91,7 +114,7 @@
         position: relative;
 
         width: 100%;
-        max-width: @max-width;
+        // max-width: @max-width;
         height: 100%;
         max-height: @max-height;
 
@@ -186,11 +209,24 @@
                 }
                 .inner-container {
                     text-align: left;
-                    overflow-y: scroll;
+                    // overflow-y: scroll;
 
                     .opacity-height-0;
                 }
             }
         }
     }
+}
+
+// scroll theme
+.mCS-minimal-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
+    background-color: #000;
+    background-color: rgba(0,0,0,0);
+    filter: "alpha(opacity=0)";
+    -ms-filter: "alpha(opacity=0)"; 
+}
+.mCSB_outside + .mCS-minimal.mCSB_scrollTools_vertical, 
+.mCSB_outside + .mCS-minimal-dark.mCSB_scrollTools_vertical{
+    right: 0; 
+    margin: 0 0; 
 }

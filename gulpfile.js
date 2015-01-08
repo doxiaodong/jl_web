@@ -50,5 +50,5 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['clean'], function() {
-	gulp.start('watch', 'less', 'js');
+	gulp.start('js', 'less', 'watch');
 });
