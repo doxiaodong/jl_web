@@ -99,6 +99,18 @@ li {
   min-height: 100%;
   margin: auto;
 }
+.pages .page-block {
+  margin: 15px auto;
+}
+.pages .page-block .each-header {
+  padding: 10px;
+  background-color: #f6f6f6;
+  border-radius: 3px 3px 0 0;
+}
+.pages .page-block .each-inner {
+  background-color: #ffffff;
+  border-radius: 0 0 3px 3px;
+}
 .page-1 .slider-nav {
   -webkit-transform: translate3d(0%, 0, 0);
   -moz-transform: translate3d(0%, 0, 0);
@@ -319,7 +331,7 @@ li {
 }
 .container ul.list li.each-block:hover,
 .container ul.list li.each-block.active {
-  background-color: #ffb74c;
+  background-color: #e1e1e1;
 }
 .container ul.list li.each-block.active {
   -webkit-transform: scale3d(1, 1, 1);
