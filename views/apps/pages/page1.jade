@@ -1,16 +1,23 @@
 extends layout.jade
 block content
-	.page-block
-		.each-header 春江潮水连海平
-		.each-inner
-			-for (var i = 0; i < 50; i++) {
-				p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
-			-}
-			p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
-	.page-block
-		.each-header 海上明月共潮生
-		.each-inner
-			-for (var i = 0; i < 10; i++) {
-				p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
-			-}
-			p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
+	.view-center
+		block content-center-page1
+			.page-block
+				.each-header
+					a(href="/test", data-pjax) 点我点我
+				.each-inner
+					-for (var i = 0; i < 50; i++) {
+						p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
+					-}
+					p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
+			.page-block
+				.each-header 海上明月共潮生
+				.each-inner
+					-for (var i = 0; i < 10; i++) {
+						p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
+					-}
+					p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
+	.view-right
+		block content-right-page1
+
+	

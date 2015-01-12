@@ -22,25 +22,26 @@ html
 				li.each-block.top.left
 					.inner
 						h1.title 春江潮水连海平
-						.inner-container.mCustomScrollbar(data-mcs-theme='minimal-dark')
+						.page1.inner-container.mCustomScrollbar(data-mcs-theme='minimal-dark')
 							include pages/page1.jade
 				li.each-block.top.right
 					.inner
 						h1.title 海上明月共潮生
-						.inner-container.mCustomScrollbar(data-mcs-theme='minimal-dark')
+						.page2.inner-container.mCustomScrollbar(data-mcs-theme='minimal-dark')
 							include pages/page2.jade
 				li.each-block.bottom.left
 					.inner
 						h1.title 滟滟随波千万里
-						.inner-container.mCustomScrollbar(data-mcs-theme='minimal-dark')
+						.page3.inner-container.mCustomScrollbar(data-mcs-theme='minimal-dark')
 							include pages/page3.jade
 				li.each-block.bottom.right
 					.inner
 						h1.title 何处春江无月明
-						.inner-container.mCustomScrollbar(data-mcs-theme='minimal-dark')
+						.page4.inner-container.mCustomScrollbar(data-mcs-theme='minimal-dark')
 							include pages/page4.jade
 
 		//- script(src="/js/zepto.min.js")
 		script(src="/js/jquery-2.1.3.min.js")
+		script(src="/js/jquery.pjax.js")
 		script(src="/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js")
 		script(src="/js/main.min.js")

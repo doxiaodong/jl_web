@@ -94,6 +94,7 @@ li {
   clear: both;
 }
 .pages {
+  position: relative;
   width: 100%;
   max-width: 1024px;
   min-height: 100%;
@@ -110,6 +111,22 @@ li {
 .pages .page-block .each-inner {
   background-color: #ffffff;
   border-radius: 0 0 3px 3px;
+}
+.pages .view-left,
+.pages .view-right {
+  position: absolute;
+  opacity: 0;
+}
+.pages .view-left,
+.pages .view-center,
+.pages .view-right {
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+.pages .view-center {
+  opacity: 1;
 }
 .page-1 .slider-nav {
   -webkit-transform: translate3d(0%, 0, 0);

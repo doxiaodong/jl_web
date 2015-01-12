@@ -41,6 +41,19 @@ function init() {
     $('.back-index').on(defaultEvent.click, function() {
         collapsePage(inner);
     });
+
+
+    $.pjax({
+        selector: 'a',
+        container: '.page1 .pages .view-center',
+        show: 'fade',
+        cache: true,
+        storage: true,
+        titleSuffix: '',
+        filter: function(){},
+        callback: function(){}
+    });
+
     // expand
     function expandPage(inner, obj, head) {
             inner.addClass('has-one-active');
@@ -151,7 +164,7 @@ function init() {
                     y1 = null;
                     y2 = null;
                 });
-            })
+            });
             return this;
         }
     });
@@ -163,7 +176,7 @@ function init() {
         }, swipeRight: function() {
             swipePage('prev');
         }
-    })
+    });
     /*way 2*/
     /*$('.pages').swipe('left', function(){
         swipePage('next');

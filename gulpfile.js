@@ -13,11 +13,11 @@ var gulp = require('gulp'),
 var paths = {
 	less: {
 		less: 'public/less/index.less',
-		lesses: 'public/less/**/*.less', 
+		lesses: 'public/less/**.less', 
 	},
 	css: 'public/css',
 	js: {
-		jses: 'public/js/pages/**/*.js',
+		jses: 'public/js/pages/**.js',
 		main: 'public/js'
 	}
 }
@@ -50,5 +50,5 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['clean'], function() {
-	gulp.start('js', 'less', 'watch');
+	gulp.start('js', 'less');
 });

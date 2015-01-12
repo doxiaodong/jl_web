@@ -18,7 +18,12 @@ router.get('/userlist', function(req, res) {
 		});
 	});
 });
-
+router.get('/test', function(req, res) {
+	res.render('apps/articles/test', { 
+		"title": "hahaha",
+		"is_pjax": "false"
+	});
+});
 /* apps end */
 
 module.exports = router;

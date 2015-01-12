@@ -4,6 +4,7 @@
 @import '../partless/_css3';
 
 .pages {
+	position: relative;
 	width: 100%;
 	max-width: @max-width;
 	min-height: 100%;
@@ -19,5 +20,16 @@
 			background-color: @bg-page;
 			border-radius: 0 0 3px 3px;
 		}
+	}
+
+	.view-left, .view-right {
+		position: absolute;
+		opacity: 0;
+	}
+	.view-left, .view-center, .view-right {
+		.transition(0.5s);
+	}
+	.view-center {
+		opacity: 1;
 	}
 }
