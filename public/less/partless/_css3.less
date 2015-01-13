@@ -69,6 +69,17 @@
 	filter: alpha(opacity=@ie);
 	opacity: @opacity;
 }
+.display-flex () {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+.flex (@width) {
+	-webkit-flex: @width;
+	-ms-flex: @width;
+	flex: @width;
+}
 .perspective (@size){
 	-webkit-perspective: @size;
 	-moz-perspective: @size;

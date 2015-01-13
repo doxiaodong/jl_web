@@ -1,13 +1,16 @@
 @import '../partless/_base';
 @import '../partless/_clearfix';
+@import '../partless/_twoside';
 @import '../partless/_inline-block-center';
 @import '../partless/_css3';
-
+.pointer {
+	cursor: pointer;
+}
 .pages {
 	position: relative;
 	width: 100%;
 	max-width: @max-width;
-	min-height: 100%;
+	// min-height: 100%;
 	margin: auto;
 	.page-block {
 		margin: 15px auto;
@@ -15,10 +18,78 @@
 			padding: 10px;
 			background-color: #f6f6f6;
 			border-radius: 3px 3px 0 0;
+			.big-size {
+				font-size: 20px;
+				font-weight: 700;
+			}
+			.changes {
+				font-size: 14px;
+				margin-top: 5px;
+				color: @color-gray;
+			}
 		}
 		.each-inner {
+			padding: 10px;
 			background-color: @bg-page;
 			border-radius: 0 0 3px 3px;
+			.articles {
+				.article {
+					padding: 10px 0;
+					&:first-child {
+						padding-top: 0;
+					}
+					&:last-child {
+						padding-bottom: 0;
+					}
+					& + .article {
+						border-top: 1px solid #eee;
+					}
+					.display-flex;
+					.title {
+						.flex(3);
+					}
+					.time {
+						.flex(1);
+						line-height: 24px;
+						text-align: right;
+					}
+				}
+			}
+			.replys {
+				font-size: 14px;
+				.each-reply {
+					padding: 10px 0;
+					.left-right(50px);
+					& > .right {
+						
+						.word {
+							.user {
+								color: tomato;
+							}
+							min-height: 50px;
+						}
+						.message {
+							text-align: right;
+							color: @color-gray;
+							& > span {
+								margin-left: 5px;
+							}
+							& > span.pointer:hover {
+								color: darken(@color-gray, 10%);
+							}
+						}
+					}
+					& + .each-reply {
+						border-top: 1px solid #ccc;
+					}
+					&:first-child {
+						padding-top: 0;
+					}
+					&:last-child {
+						padding-bottom: 0;
+					}
+				}
+			}
 		}
 	}
 

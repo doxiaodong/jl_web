@@ -1,4 +1,50 @@
 -if (!is_pjax)
 extends ../index.jade
 block content-center-page1
-	.haha 谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁谁是谁
+	.page-block
+		.each-header
+			span.full-title.big-size 萧萧梧叶送秋声
+			.changes 2015-1-13
+		.each-inner
+			.each-article
+				-for (var i = 0; i < 10; i++){
+					p 云和山的彼端
+				-}
+	.page-block
+		.each-header 3 回复
+		.each-inner
+			.replys
+				.each-reply
+					img.pic.left(src='/img/user-default.jpg')
+					.right
+						
+						.word
+							.user 毒枭东
+							p 写的真好
+						.message
+							span.time 2015年1月13日
+							span.pointer.icon.ion-reply 回复
+							span.pointer.icon.ion-android-share 转发
+							span.floor 1楼
+				.each-reply
+					img.pic.left(src='/img/user-default.jpg')
+					.right
+						.word
+							.user 于大海
+							p 写的真好 山东踩泰山
+						.message
+							span.time 2015年1月14日
+							span.pointer.icon.ion-reply 回复
+							span.pointer.icon.ion-android-share 转发
+							span.floor 2楼
+				.each-reply
+					img.pic.left(src='/img/user-default.jpg')
+					.right
+						.word
+							.user 刘鹏飏
+							p 写的真好 秦皇一岛游
+						.message
+							span.time 2015年1月15日
+							span.pointer.icon.ion-reply 回复
+							span.pointer.icon.ion-android-share 转发
+							span.floor 3楼

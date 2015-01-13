@@ -93,11 +93,13 @@ li {
 .clearfix:after {
   clear: both;
 }
+.pointer {
+  cursor: pointer;
+}
 .pages {
   position: relative;
   width: 100%;
   max-width: 1024px;
-  min-height: 100%;
   margin: auto;
 }
 .pages .page-block {
@@ -108,9 +110,91 @@ li {
   background-color: #f6f6f6;
   border-radius: 3px 3px 0 0;
 }
+.pages .page-block .each-header .big-size {
+  font-size: 20px;
+  font-weight: 700;
+}
+.pages .page-block .each-header .changes {
+  font-size: 14px;
+  margin-top: 5px;
+  color: #838383;
+}
 .pages .page-block .each-inner {
+  padding: 10px;
   background-color: #ffffff;
   border-radius: 0 0 3px 3px;
+}
+.pages .page-block .each-inner .articles .article {
+  padding: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.pages .page-block .each-inner .articles .article:first-child {
+  padding-top: 0;
+}
+.pages .page-block .each-inner .articles .article:last-child {
+  padding-bottom: 0;
+}
+.pages .page-block .each-inner .articles .article + .article {
+  border-top: 1px solid #eee;
+}
+.pages .page-block .each-inner .articles .article .title {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+}
+.pages .page-block .each-inner .articles .article .time {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  line-height: 24px;
+  text-align: right;
+}
+.pages .page-block .each-inner .replys {
+  font-size: 14px;
+}
+.pages .page-block .each-inner .replys .each-reply {
+  padding: 10px 0;
+  position: relative;
+}
+.pages .page-block .each-inner .replys .each-reply > .left {
+  display: inline-block;
+  float: left;
+  width: 50px;
+}
+.pages .page-block .each-inner .replys .each-reply > .right {
+  display: block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 60px;
+}
+.pages .page-block .each-inner .replys .each-reply > .right .word {
+  min-height: 50px;
+}
+.pages .page-block .each-inner .replys .each-reply > .right .word .user {
+  color: tomato;
+}
+.pages .page-block .each-inner .replys .each-reply > .right .message {
+  text-align: right;
+  color: #838383;
+}
+.pages .page-block .each-inner .replys .each-reply > .right .message > span {
+  margin-left: 5px;
+}
+.pages .page-block .each-inner .replys .each-reply > .right .message > span.pointer:hover {
+  color: #6a6a6a;
+}
+.pages .page-block .each-inner .replys .each-reply + .each-reply {
+  border-top: 1px solid #ccc;
+}
+.pages .page-block .each-inner .replys .each-reply:first-child {
+  padding-top: 0;
+}
+.pages .page-block .each-inner .replys .each-reply:last-child {
+  padding-bottom: 0;
 }
 .pages .view-left,
 .pages .view-right {
@@ -358,7 +442,7 @@ li {
   transform: scale3d(1, 1, 1);
   padding-top: 50px;
 }
-.container ul.list li.each-block.active .inner .title {
+.container ul.list li.each-block.active .inner > .title {
   height: 0;
   opacity: 0;
 }
@@ -391,14 +475,14 @@ li {
   overflow: hidden;
   width: 100%;
 }
-.container ul.list li.each-block .inner .title,
+.container ul.list li.each-block .inner > .title,
 .container ul.list li.each-block .inner .inner-container {
   -webkit-transition: opacity 0.5s;
   -moz-transition: opacity 0.5s;
   -o-transition: opacity 0.5s;
   transition: opacity 0.5s;
 }
-.container ul.list li.each-block .inner .title {
+.container ul.list li.each-block .inner > .title {
   height: auto;
   opacity: 1;
 }
@@ -406,6 +490,16 @@ li {
   text-align: left;
   height: 0;
   opacity: 0;
+}
+.footer {
+  min-height: 50px;
+  background-color: #ffffff;
+}
+.footer .content {
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 50px;
 }
 .mCS-minimal-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
   background-color: #000;

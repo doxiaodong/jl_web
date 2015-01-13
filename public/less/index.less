@@ -167,7 +167,7 @@
                 .transform-scale3d(1, 1, 1);
                 padding-top: @header_height;
                 .inner {
-                    .title {
+                    & > .title {
                         .opacity-height-0;
                     }
                 }
@@ -201,10 +201,10 @@
                 overflow: hidden;
 
                 width: 100%;
-                .title, .inner-container {
+                & > .title, .inner-container {
                     .transition(opacity @base_duration);
                 }
-                .title {
+                & > .title {
                     .opacity-height-1;
                 }
                 .inner-container {
@@ -215,6 +215,16 @@
                 }
             }
         }
+    }
+}
+.footer {
+    min-height: 50px;
+    background-color: @bg-page;
+    .content {
+        max-width: @max-width;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 50px;
     }
 }
 

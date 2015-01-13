@@ -1,22 +1,17 @@
 extends layout.jade
 block content
-	.view-center
+	.view-center.page1
 		block content-center-page1
 			.page-block
 				.each-header
-					a(href="/test", data-pjax) 点我点我
+					span.big-size 文章列表
 				.each-inner
-					-for (var i = 0; i < 50; i++) {
-						p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
-					-}
-					p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
-			.page-block
-				.each-header 海上明月共潮生
-				.each-inner
-					-for (var i = 0; i < 10; i++) {
-						p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
-					-}
-					p 春江潮水连海平 海上明月共潮生 滟滟随波千万里 何处春江无月明
+					ul.articles
+						-for (var i = 0; i < 10; i++) {
+							li.article
+								a.title(href='/test#page1', data-pjax='1') 萧萧梧叶送秋声
+								.time 2015-1-13
+						-}
 	.view-right
 		block content-right-page1
 
