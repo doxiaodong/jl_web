@@ -183,7 +183,10 @@ li {
   color: #838383;
 }
 .pages .page-block .each-inner .replys .each-reply > .right .message > span {
-  margin-left: 5px;
+  margin-left: 10px;
+}
+.pages .page-block .each-inner .replys .each-reply > .right .message > span:before {
+  margin-right: 2px;
 }
 .pages .page-block .each-inner .replys .each-reply > .right .message > span.pointer:hover {
   color: #6a6a6a;
