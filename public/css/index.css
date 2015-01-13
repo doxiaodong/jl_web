@@ -176,6 +176,7 @@ li {
 }
 .pages .page-block .each-inner .replys .each-reply > .right .word .user {
   color: tomato;
+  margin-bottom: 5px;
 }
 .pages .page-block .each-inner .replys .each-reply > .right .message {
   text-align: right;
