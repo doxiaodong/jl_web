@@ -72,6 +72,7 @@ function init() {
 
         timeAfterActive = setTimeout(function() {
             obj.addClass('after-active');
+            body.addClass('after-active');
             var header = $('header.header');
             if (!header.hasClass('active')) {
                 header.addClass('active');
@@ -87,6 +88,7 @@ function init() {
             $('header.header').removeClass('active');
         }
         $('li.each-block.active').removeClass('after-active active');
+        body.removeClass('after-active');
         inner.removeClass('has-one-active');
     }
 
@@ -99,7 +101,7 @@ function init() {
             }
         });
         eachNav.eq(index).addClass('active');
-        body.attr('class', 'page-' + (index + 1));
+        body.attr('data-page', (index + 1));
     }
 
     $.fn.swipe = function(direction, callback) {
@@ -112,7 +114,7 @@ function init() {
                 x2 = null,
                 y1 = null,
                 y2 = null;
-            var changeWidth = 50, changeHeight = 50;
+            var changeWidth = 100, changeHeight = 50;
             touchObj.addEventListener('touchstart', function(event) {
                 if (event.touches.length == 1) {
                     var touch = event.touches[0];
@@ -176,82 +178,6 @@ function init() {
         });
         return this;
     };
-    // $.fn.extend({
-    //     swipe: function(direction, callback) {
-    //         if (this === []) {
-    //             return this;
-    //         }
-    //         this.each(function() {
-    //             var touchObj = this;
-    //             var x1 = null,
-    //                 x2 = null,
-    //                 y1 = null,
-    //                 y2 = null;
-    //             var changeWidth = 50, changeHeight = 50;
-    //             touchObj.addEventListener('touchstart', function(event) {
-    //                 if (event.touches.length == 1) {
-    //                     var touch = event.touches[0];
-    //                     x1 = touch.pageX;
-    //                     x2 = touch.pageX;
-    //                     y1 = touch.pageY;
-    //                     y2 = touch.pageY;
-    //                 }
-    //             });
-    //             touchObj.addEventListener('touchmove', function(event) {
-    //                 if (event.touches.length == 1) {
-    //                     var touch = event.touches[0];
-    //                     x2 = touch.pageX;
-    //                     y2 = touch.pageY;
-    //                 }
-    //             });
-    //             touchObj.addEventListener('touchend', function(event) {
-    //                 // left and right
-    //                 if (x1 !== null && Math.abs(y2 - y1) < changeHeight ) {
-    //                     if (x2 - x1 > changeWidth) {
-    //                         if (direction === undefined) {
-    //                             $(touchObj).trigger('swipeRight');
-    //                         }
-    //                         if (direction === 'right') {
-    //                             callback();
-    //                         }
-
-    //                     } else if (x1 - x2 > changeWidth) {
-    //                         if (direction === undefined) {
-    //                             $(touchObj).trigger('swipeLeft');
-    //                         }
-    //                         if (direction === 'left') {
-    //                             callback();
-    //                         }
-    //                     }
-    //                 }
-    //                 // top and bottom
-    //                 if (x1 !== null && Math.abs(x2 - x1) < changeWidth ) {
-    //                     if (y2 - y1 > changeHeight) {
-    //                         if (direction === undefined) {
-    //                             $(touchObj).trigger('swipeTop');
-    //                         }
-    //                         if (direction === 'top') {
-    //                             callback();
-    //                         }
-
-    //                     } else if (y1 - y2 > changeHeight) {
-    //                         if (direction === undefined) {
-    //                             $(touchObj).trigger('swipeBottom');
-    //                         }
-    //                         if (direction === 'bottom') {
-    //                             callback();
-    //                         }
-    //                     }
-    //                 }
-    //                 x1 = null;
-    //                 x2 = null;
-    //                 y1 = null;
-    //                 y2 = null;
-    //             });
-    //         });
-    //         return this;
-    //     }
-    // });
     
     /*way 1*/
     $('.pages').swipe().on({
@@ -270,14 +196,15 @@ function init() {
     $('.pages').each(function() {
         this.addEventListener('gestureend', function(event) {
             if (event.scale < 1) {
-                collapsePage(inner);
+                window.location.hash = '';
+                window.location.pathname = '/';
             }
         });
     });
     
     function swipePage(direction) {
         var num = headerNav.find('.each-nav').length;
-        var curr = body.attr('class').slice(5) - 1;
+        var curr = body.attr('data-page') - 1;
         var prev = curr - 1 >= 0 ? curr - 1 : num - 1;
         var next = curr + 1 <= num - 1 ? curr + 1 : 0;
         var hash = window.location.hash;
