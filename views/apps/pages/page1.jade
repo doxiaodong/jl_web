@@ -7,6 +7,9 @@ block content
 					span.big-size 文章列表
 				.each-inner
 					ul.articles
+						li.article
+							a.title(href='/test.html', data-pjax='1') 不一样
+							.time 2015-1-12
 						-for (var i = 0; i < 10; i++) {
 							li.article
 								a.title(href='/test#page1', data-pjax='1') 萧萧梧叶送秋声
@@ -14,5 +17,3 @@ block content
 						-}
 	.view-right
 		block content-right-page1
-
-	

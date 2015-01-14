@@ -96,58 +96,6 @@ li {
 .pointer {
   cursor: pointer;
 }
-.ds-thread {
-  background-color: #ffffff !important;
-  border-radius: 3px 3px 3px 3px!important;
-  padding-bottom: 10px!important;
-}
-.ds-thread .ds-meta {
-  display: none !important;
-}
-.ds-thread .ds-comments-info {
-  padding: 10px!important;
-  background-color: #f6f6f6!important;
-  border-radius: 3px 3px 0 0!important;
-  -webkit-box-sizing: border-box !important;
-  box-sizing: border-box !important;
-}
-.ds-thread .ds-comments-info .ds-sort {
-  right: 10px!important;
-  top: inherit!important;
-}
-.ds-thread .ds-comments .ds-post:first-child {
-  border-top: 0!important;
-}
-.ds-thread .ds-comments .ds-comment-body .ds-comment-header .ds-user-name {
-  color: tomato!important;
-}
-.ds-thread .ds-comments .ds-comment-body .ds-comment-footer .ds-post-likes,
-.ds-thread .ds-comments .ds-comment-body .ds-comment-footer .ds-post-report {
-  display: none !important;
-}
-.ds-thread .ds-comments .ds-comment-body .ds-post-delete {
-  margin: 0!important;
-}
-.ds-thread .ds-comments .ds-comment-body .ds-replybox {
-  padding: 0 0 0 60px!important;
-}
-.ds-thread .ds-powered-by {
-  display: none !important;
-}
-.ds-thread .ds-toolbar {
-  -webkit-box-sizing: border-box !important;
-  box-sizing: border-box !important;
-  padding: 8px 10px!important;
-}
-.ds-thread .ds-replybox {
-  padding: 0 10px 0 70px!important;
-}
-.ds-thread .ds-replybox .ds-avatar {
-  left: 10px!important;
-}
-.ds-thread .ds-replybox .ds-post-toolbar .ds-post-options .ds-sync {
-  display: none !important;
-}
 .pages {
   position: relative;
   width: 100%;
@@ -267,6 +215,11 @@ li {
 }
 .pages .view-center {
   opacity: 1;
+}
+html,
+body {
+  background-color: #fff;
+  -webkit-overflow-scrolling: inherit;
 }
 .page-1 .slider-nav {
   -webkit-transform: translate3d(0%, 0, 0);
@@ -542,8 +495,15 @@ li {
   height: auto;
   opacity: 1;
 }
+@media screen and (min-width: 768px) {
+  .container ul.list li.each-block .inner > .title {
+    font-size: 50px;
+  }
+}
 .container ul.list li.each-block .inner .inner-container {
   text-align: left;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   height: 0;
   opacity: 0;
 }

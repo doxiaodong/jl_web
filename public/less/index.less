@@ -3,7 +3,10 @@
 @import 'pages/_page2';
 @import 'pages/_page3';
 @import 'pages/_page4';
-
+html, body {
+    background-color: #fff;
+    -webkit-overflow-scrolling: inherit;
+}
 .opacity-height-0() {
     height: 0;
 
@@ -206,10 +209,14 @@
                 }
                 & > .title {
                     .opacity-height-1;
+                    @media screen and (min-width: 768px) {
+                        font-size: 50px;
+                    }
                 }
                 .inner-container {
                     text-align: left;
-                    // overflow-y: scroll;
+                    overflow-y: auto;
+                    -webkit-overflow-scrolling : touch;
 
                     .opacity-height-0;
                 }

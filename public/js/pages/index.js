@@ -6,10 +6,10 @@ function init() {
     var isTouchScreen = function() {
         return 'ontouchstart' in document.documentElement;
     };
-    var defaultEvent = isTouchScreen() ? {
-        click: 'touchend',
+    var defaultEvent = isTouchScreen() && !window.platform.isDesktop ? {
+        click: 'touchend'
     } : {
-        click: 'click',
+        click: 'click'
     };
     // header
     var headerNav = $('.header').find('.nav-list');
@@ -42,19 +42,12 @@ function init() {
 
     $('.back-index').on(defaultEvent.click, function() {
         window.location.hash = '';
-        collapsePage(inner);
+        window.location.pathname = '/';
     });
 
-
     // $.pjax({
-    //     selector: 'a[data-pjax=1]',
-    //     container: '.pages .view-center.page1',
-    //     show: 'fade',
-    //     cache: true,
-    //     storage: true,
-    //     titleSuffix: '',
-    //     filter: function(){},
-    //     callback: function(){}
+    //     target: 'a[data-pjax]',
+    //     container: '.pages .view-center.page1'
     // });
 
     // refresh
@@ -109,83 +102,156 @@ function init() {
         body.attr('class', 'page-' + (index + 1));
     }
 
-
-    $.fn.extend({
-        swipe: function(direction, callback) {
-            if (this === []) {
-                return this;
-            }
-            this.each(function() {
-                var touchObj = this;
-                var x1 = null,
-                    x2 = null,
-                    y1 = null,
-                    y2 = null;
-                var changeWidth = 50, changeHeight = 50;
-                touchObj.addEventListener('touchstart', function(event) {
-                    if (event.touches.length == 1) {
-                        var touch = event.touches[0];
-                        x1 = touch.pageX;
-                        x2 = touch.pageX;
-                        y1 = touch.pageY;
-                        y2 = touch.pageY;
-                    }
-                });
-                touchObj.addEventListener('touchmove', function(event) {
-                    if (event.touches.length == 1) {
-                        var touch = event.touches[0];
-                        x2 = touch.pageX;
-                        y2 = touch.pageY;
-                    }
-                });
-                touchObj.addEventListener('touchend', function(event) {
-                    // left and right
-                    if (x1 !== null && Math.abs(y2 - y1) < changeHeight ) {
-                        if (x2 - x1 > changeWidth) {
-                            if (direction === undefined) {
-                                $(touchObj).trigger('swipeRight');
-                            }
-                            if (direction === 'right') {
-                                callback();
-                            }
-
-                        } else if (x1 - x2 > changeWidth) {
-                            if (direction === undefined) {
-                                $(touchObj).trigger('swipeLeft');
-                            }
-                            if (direction === 'left') {
-                                callback();
-                            }
-                        }
-                    }
-                    // top and bottom
-                    if (x1 !== null && Math.abs(x2 - x1) < changeWidth ) {
-                        if (y2 - y1 > changeHeight) {
-                            if (direction === undefined) {
-                                $(touchObj).trigger('swipeTop');
-                            }
-                            if (direction === 'top') {
-                                callback();
-                            }
-
-                        } else if (y1 - y2 > changeHeight) {
-                            if (direction === undefined) {
-                                $(touchObj).trigger('swipeBottom');
-                            }
-                            if (direction === 'bottom') {
-                                callback();
-                            }
-                        }
-                    }
-                    x1 = null;
-                    x2 = null;
-                    y1 = null;
-                    y2 = null;
-                });
-            });
+    $.fn.swipe = function(direction, callback) {
+        if (this === []) {
             return this;
         }
-    });
+        this.each(function() {
+            var touchObj = this;
+            var x1 = null,
+                x2 = null,
+                y1 = null,
+                y2 = null;
+            var changeWidth = 50, changeHeight = 50;
+            touchObj.addEventListener('touchstart', function(event) {
+                if (event.touches.length == 1) {
+                    var touch = event.touches[0];
+                    x1 = touch.pageX;
+                    x2 = touch.pageX;
+                    y1 = touch.pageY;
+                    y2 = touch.pageY;
+                }
+            });
+            touchObj.addEventListener('touchmove', function(event) {
+                if (event.touches.length == 1) {
+                    var touch = event.touches[0];
+                    x2 = touch.pageX;
+                    y2 = touch.pageY;
+                }
+            });
+            touchObj.addEventListener('touchend', function(event) {
+                // left and right
+                if (x1 !== null && Math.abs(y2 - y1) < changeHeight ) {
+                    if (x2 - x1 > changeWidth) {
+                        if (direction === undefined) {
+                            $(touchObj).trigger('swipeRight');
+                        }
+                        if (direction === 'right') {
+                            callback();
+                        }
+
+                    } else if (x1 - x2 > changeWidth) {
+                        if (direction === undefined) {
+                            $(touchObj).trigger('swipeLeft');
+                        }
+                        if (direction === 'left') {
+                            callback();
+                        }
+                    }
+                }
+                // top and bottom
+                if (x1 !== null && Math.abs(x2 - x1) < changeWidth ) {
+                    if (y2 - y1 > changeHeight) {
+                        if (direction === undefined) {
+                            $(touchObj).trigger('swipeTop');
+                        }
+                        if (direction === 'top') {
+                            callback();
+                        }
+
+                    } else if (y1 - y2 > changeHeight) {
+                        if (direction === undefined) {
+                            $(touchObj).trigger('swipeBottom');
+                        }
+                        if (direction === 'bottom') {
+                            callback();
+                        }
+                    }
+                }
+                x1 = null;
+                x2 = null;
+                y1 = null;
+                y2 = null;
+            });
+        });
+        return this;
+    };
+    // $.fn.extend({
+    //     swipe: function(direction, callback) {
+    //         if (this === []) {
+    //             return this;
+    //         }
+    //         this.each(function() {
+    //             var touchObj = this;
+    //             var x1 = null,
+    //                 x2 = null,
+    //                 y1 = null,
+    //                 y2 = null;
+    //             var changeWidth = 50, changeHeight = 50;
+    //             touchObj.addEventListener('touchstart', function(event) {
+    //                 if (event.touches.length == 1) {
+    //                     var touch = event.touches[0];
+    //                     x1 = touch.pageX;
+    //                     x2 = touch.pageX;
+    //                     y1 = touch.pageY;
+    //                     y2 = touch.pageY;
+    //                 }
+    //             });
+    //             touchObj.addEventListener('touchmove', function(event) {
+    //                 if (event.touches.length == 1) {
+    //                     var touch = event.touches[0];
+    //                     x2 = touch.pageX;
+    //                     y2 = touch.pageY;
+    //                 }
+    //             });
+    //             touchObj.addEventListener('touchend', function(event) {
+    //                 // left and right
+    //                 if (x1 !== null && Math.abs(y2 - y1) < changeHeight ) {
+    //                     if (x2 - x1 > changeWidth) {
+    //                         if (direction === undefined) {
+    //                             $(touchObj).trigger('swipeRight');
+    //                         }
+    //                         if (direction === 'right') {
+    //                             callback();
+    //                         }
+
+    //                     } else if (x1 - x2 > changeWidth) {
+    //                         if (direction === undefined) {
+    //                             $(touchObj).trigger('swipeLeft');
+    //                         }
+    //                         if (direction === 'left') {
+    //                             callback();
+    //                         }
+    //                     }
+    //                 }
+    //                 // top and bottom
+    //                 if (x1 !== null && Math.abs(x2 - x1) < changeWidth ) {
+    //                     if (y2 - y1 > changeHeight) {
+    //                         if (direction === undefined) {
+    //                             $(touchObj).trigger('swipeTop');
+    //                         }
+    //                         if (direction === 'top') {
+    //                             callback();
+    //                         }
+
+    //                     } else if (y1 - y2 > changeHeight) {
+    //                         if (direction === undefined) {
+    //                             $(touchObj).trigger('swipeBottom');
+    //                         }
+    //                         if (direction === 'bottom') {
+    //                             callback();
+    //                         }
+    //                     }
+    //                 }
+    //                 x1 = null;
+    //                 x2 = null;
+    //                 y1 = null;
+    //                 y2 = null;
+    //             });
+    //         });
+    //         return this;
+    //     }
+    // });
     
     /*way 1*/
     $('.pages').swipe().on({
@@ -216,9 +282,11 @@ function init() {
         var next = curr + 1 <= num - 1 ? curr + 1 : 0;
         var hash = window.location.hash;
         if (direction === 'prev') {
-            hash = pageString + (prev + 1);
+            headerNav.find('.each-nav').eq(prev).trigger(defaultEvent.click);
+            // hash = pageString + (prev + 1);
         } else if (direction === 'next') {
-            hash = pageString + (next + 1);
+            headerNav.find('.each-nav').eq(next).trigger(defaultEvent.click);
+            // hash = pageString + (next + 1);
         }
     }
 }
