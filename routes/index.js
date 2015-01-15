@@ -5,7 +5,7 @@ var router = express.Router();
 /* home page. */
 router.get('/', function(req, res) {
 	res.render('apps/index', {
-		"title": "jl",
+		"title": "QQ",
 		"is_pjax": false
 	});
 });
