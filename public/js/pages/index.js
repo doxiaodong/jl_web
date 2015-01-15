@@ -53,16 +53,21 @@ function init() {
             url: $(this).attr('href'),
             container: '#page' + page + '-container'
         };
-        $.pjax(opts);
+        $(opts.container).off('pjax:start');
+        $(opts.container).on('pjax:start', function() {
+            $('.pjaxloader').show();
+        });
         $(opts.container).off('pjax:end');
         $(opts.container).on('pjax:end', function() {
             $('head link[href*="duoshuo.com"]').remove();
             $('head script[src*="duoshuo.com"]').remove();
             $('head style').remove();
             $('#ds-notify').remove();
-            setTimeout(duoshuo, 1000);
-            // duoshuo();
+            // setTimeout(duoshuo, 1000);
+            duoshuo();
+            $('.pjaxloader').hide();
         });
+        $.pjax(opts);
         e.preventDefault();
     });
 
