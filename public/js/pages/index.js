@@ -1,5 +1,6 @@
 window.addEventListener('load', init);
-
+// global
+var duoshuoQuery = {short_name:"duxiaodong"};
 function init() {
     var html = $('html');
     var body = $('body');
@@ -45,10 +46,38 @@ function init() {
         window.location.pathname = '/';
     });
 
-    // $.pjax({
-    //     target: 'a[data-pjax]',
-    //     container: '.pages .view-center.page1'
-    // });
+    var pages = $('.pages');
+    pages.on(defaultEvent.click, 'a[data-pjax]', function(e) {
+        var page = $(this).data('pjax');
+        var opts = {
+            url: $(this).attr('href'),
+            container: '#page' + page + '-container'
+        };
+        $.pjax(opts);
+        $(opts.container).off('pjax:end');
+        $(opts.container).on('pjax:end', function() {
+            $('head link[href*="duoshuo.com"]').remove();
+            $('head script[src*="duoshuo.com"]').remove();
+            $('head style').remove();
+            $('#ds-notify').remove();
+            setTimeout(duoshuo, 1000);
+            // duoshuo();
+        });
+        e.preventDefault();
+    });
+
+    // duoshuo
+    function duoshuo() {
+        (function() {
+            var ds = document.createElement('script');
+            // ds.className = 'duoshuo';
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    }
 
     // refresh
     function refreshIndex(inner) {

@@ -4,7 +4,10 @@ var router = express.Router();
 /* apps start */
 /* home page. */
 router.get('/', function(req, res) {
-	res.render('apps/index', { "title": "jl" });
+	res.render('apps/index', {
+		"title": "jl",
+		"is_pjax": false
+	});
 });
 
 /* userlist page */
@@ -18,10 +21,12 @@ router.get('/userlist', function(req, res) {
 		});
 	});
 });
+
+// 看是否为pjax请求
 router.get('/test', function(req, res) {
 	res.render('apps/articles/test', { 
 		"title": "hahaha",
-		"is_pjax": "false"
+		"is_pjax": true
 	});
 });
 /* apps end */

@@ -756,20 +756,22 @@ body.after-active .container ul.list {
   height: 0;
   opacity: 0;
 }
-.container ul.list li.each-block.scroll.after-active {
-  height: 100%;
-}
-.container ul.list li.each-block.scroll.after-active .inner .inner-container,
-.container ul.list li.each-block.scroll.after-active .inner {
-  height: 100%;
-  opacity: 1;
-}
-.container ul.list li.each-block.scroll .inner {
-  overflow: hidden;
-}
-.container ul.list li.each-block.scroll .inner .inner-container {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+@media screen and (max-width: 1024px) {
+  .container ul.list li.each-block.scroll.after-active {
+    height: 100%;
+  }
+  .container ul.list li.each-block.scroll.after-active .inner .inner-container,
+  .container ul.list li.each-block.scroll.after-active .inner {
+    height: 100%;
+    opacity: 1;
+  }
+  .container ul.list li.each-block.scroll .inner {
+    overflow: hidden;
+  }
+  .container ul.list li.each-block.scroll .inner .inner-container {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 .footer {
   min-height: 50px;

@@ -227,21 +227,23 @@ body.after-active {
                 }
             }
             // scroll inner
-            &.scroll {
-                &.after-active {
-                height: 100%;
-                    .inner {
-                        .inner-container, & {
-                            height: 100%;
-                            opacity: 1;
+            @media screen and (max-width: 1024px) {
+                &.scroll {
+                    &.after-active {
+                    height: 100%;
+                        .inner {
+                            .inner-container, & {
+                                height: 100%;
+                                opacity: 1;
+                            }
                         }
                     }
-                }
-                .inner {
-                    overflow: hidden;
-                    .inner-container {
-                        overflow-y: auto;
-                        -webkit-overflow-scrolling : touch;
+                    .inner {
+                        overflow: hidden;
+                        .inner-container {
+                            overflow-y: auto;
+                            -webkit-overflow-scrolling : touch;
+                        }
                     }
                 }
             }

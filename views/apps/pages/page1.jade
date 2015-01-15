@@ -1,6 +1,6 @@
 extends layout.jade
 block content
-	.view-center.page1
+	.view-center#page1-container
 		block content-center-page1
 			.page-block
 				.each-header
@@ -15,5 +15,6 @@ block content
 								a.title(href='/test#page1', data-pjax='1') 萧萧梧叶送秋声
 								.time 2015-1-13
 						-}
+						
 	.view-right
 		block content-right-page1
