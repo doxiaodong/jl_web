@@ -8,11 +8,13 @@ block content
 				.each-inner
 					ul.articles
 						li.article
-							a.title(href='/test.html', data-pjax='1') 不一样
+							.title
+								a(href='/test.html', data-pjax='1') 不一样
 							.time 2015-1-12
 						-for (var i = 0; i < 10; i++) {
 							li.article
-								a.title(href='/test#page1', data-pjax='1') 萧萧梧叶送秋声
+								.title
+									a(href='/test#page1', data-pjax='1') 萧萧梧叶送秋声
 								.time 2015-1-13
 						-}
 						

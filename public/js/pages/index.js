@@ -47,7 +47,7 @@ function init() {
     });
 
     var pages = $('.pages');
-    pages.on(defaultEvent.click, 'a[data-pjax]', function(e) {
+    pages.on('click', 'a[data-pjax]', function(e) {
         var page = $(this).data('pjax');
         var opts = {
             url: $(this).attr('href'),
